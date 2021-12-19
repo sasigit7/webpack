@@ -1,6 +1,6 @@
 module.exports = (env, argv) => {
   function isDevelopment() {
-    return argv.mode === 'development';
+    return argv.mode === "development";
   }
   var config = {
     entry: "./src/index.js",
@@ -30,6 +30,10 @@ module.exports = (env, argv) => {
               ],
             },
           },
+        },
+        {
+          test: /\.(sa|sc|c)ss$/,
+          use: ["style-loader", "css-loader", "sass-loader"],
         },
       ],
     },
