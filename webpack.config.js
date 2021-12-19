@@ -1,9 +1,13 @@
 module.exports = (env, argv) => {
+  function isDevelopment() {
+    return argv.mode === 'development';
+  }
   var config = {
     entry: "./src/index.js",
     output: {
       filename: "bundle.js",
     },
+    devtool: isDevelopment() ? "eval-cheap-module-source-map" : "source-map",
     //mode: 'development',
     module: {
       rules: [
@@ -20,7 +24,7 @@ module.exports = (env, argv) => {
                   {
                     pragma: "React.createElement",
                     pragmaFrag: "React.Fragment",
-                    development: argv.mode === "development",
+                    development: isDevelopment(),
                   },
                 ],
               ],
