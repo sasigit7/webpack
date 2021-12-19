@@ -1,5 +1,5 @@
 const autoprefixer = require("autoprefixer");
-
+const MiniCSSExtractPlugin = require("mini-css-extract-plugin");
 module.exports = (env, argv) => {
   function isDevelopment() {
     return argv.mode === "development";
@@ -9,7 +9,10 @@ module.exports = (env, argv) => {
     output: {
       filename: "bundle.js",
     },
-    devtool: isDevelopment() ? "eval-cheap-module-source-map" : "source-map",
+    plugins: [new MiniCSSExtractPlugin({
+      filename: "bundle.css",
+    })],
+    devtool: isDevelopment() ? "cheap-module-source-map" : "source-map",
     //mode: 'development',
     module: {
       rules: [
@@ -36,7 +39,7 @@ module.exports = (env, argv) => {
         {
           test: /\.(sa|sc|c)ss$/,
           use: [
-            "style-loader",
+            MiniCSSExtractPlugin.loader,
             "css-loader",
             {
               loader: "postcss-loader",
