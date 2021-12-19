@@ -1,9 +1,19 @@
-import React from "react";
+import React, { Fragment } from "react";
 
 class MyComponent extends React.Component {
   render() {
-    return <h1>{this.props.title}</h1>;
-    // return React.createElement('h1', null, `${this.props.title}`);
+    return
+    <Fragment>
+      <h1>{this.props.title}</h1>
+      <p></p>
+    </Fragment>
+      // return React.createElement('h1', null, `${this.props.title}`);
+    // return
+    // <div>
+    //   {[1, 2, 3].map((item) => (
+    //     <div>{item}</div>
+    //   ))}
+    // </div>;
   }
 }
 
