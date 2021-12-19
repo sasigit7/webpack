@@ -1,5 +1,8 @@
 const autoprefixer = require("autoprefixer");
 const MiniCSSExtractPlugin = require("mini-css-extract-plugin");
+const CSSMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const TerserWebpackPlugin = require("terser-webpack-plugin");
+
 module.exports = (env, argv) => {
   function isDevelopment() {
     return argv.mode === "development";
@@ -8,6 +11,13 @@ module.exports = (env, argv) => {
     entry: "./src/index.js",
     output: {
       filename: "bundle.js",
+      clean: true
+    },
+    optimization: {
+      minimizer: [
+        new CSSMinimizerPlugin(),
+        new TerserWebpackPlugin()
+      ]
     },
     plugins: [new MiniCSSExtractPlugin({
       filename: "bundle.css",
